@@ -40,15 +40,15 @@ class Replicon():
         url = self._getBaseServiceUrl()  + '/UserService1.svc/BulkGetUsers'
 
         query = {
-                 "userUris": [userURIs]
+                 "userUris": userURIs
                  }
         return self.session.post(url, data=json.dumps(query))
 
 
-    def getTimeOff(userURI, startDate, endDate):
-        url = self._getBaseServiceUrl()  + '/TimeOffService1.svc/GetTimeOffDetailsForUserAndDateRange'
-        s_year, s_month, s_day = startDate.timetuple() #Or not time tupple just tuple of dates
-        e_year, e_month, e_day = endDate.timetupe()
+    def getTimeOff(self, userURI, startDate, endDate):
+        url = self._getBaseServiceUrl()  + '/TimeOffService1.svc/GetTimeOffDetailsForUserAndDateRange2'
+        s_year, s_month, s_day = startDate #Or not time tupple just tuple of dates
+        e_year, e_month, e_day = endDate
         query={"userUri": userURI,
                "dateRange": {"startDate": {"year": s_year,
                                            "month": s_month,
@@ -91,7 +91,7 @@ class Replicon():
         return response
 
 
-    def getAllHolidays(self,startDate,endDate):
+    def getHolidays(self,startDate,endDate):
         """TODO: chanve from year to actual range"""
         start_day, start_month, start_year = startDate
         end_day, end_month, end_year = endDate
@@ -114,8 +114,6 @@ class Replicon():
 
 
     def getAllHolidays(self):
-        year = datetime.year()
-        return getHolidays((1,1,year), (31,12,year))
-
-
+        year = datetime.date.today().year
+        return self.getHolidays((1,1,year), (31,12,year))
 
