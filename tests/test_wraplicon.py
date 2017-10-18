@@ -31,7 +31,7 @@ def test_getbulkUser():
 def test_getTimeOff():
     startDate = (2017, 10, 1)
     endDate = (2017, 12, 27)
-    userURI = 
+    userURI = ""
 
     resp = test_rep.getTimeOff(userURI, startDate, endDate)
 
